@@ -1,0 +1,6 @@
+node_modules/
+build/
+.evidence/
+.env
+.npm-cache/
+template/

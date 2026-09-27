@@ -1,0 +1,9 @@
+project:
+  name: DemandOps Dashboard
+  evidence: "40.1.8"
+pages: ./pages
+sources: ./sources
+plugins:
+  components: {}
+  datasources:
+    "@evidence-dev/postgres": {}
