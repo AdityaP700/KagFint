@@ -2,6 +2,18 @@
 
 ## 2026-09-27
 
+### Checkpoint 04 — SQL analytics layer
+- Added 18 analytics queries (`sql/analytics/`), one business question each,
+  cataloged in `docs/SQL_CATALOG.md` with data-grain notes.
+- Added `src/demandops/sql_runner.py`: executes all queries sequentially,
+  saves CSVs to `data/processed/analytics/`, writes a run manifest.
+- Verified all 18 run against the loaded DB; key findings: Friday/Saturday
+  demand peaks (~+22% vs Monday); promotions lift avg sales ~36%; units per
+  order ~7.7–9.4 by warehouse; Frankfurt_1 (855 days) and Munich_1 (1102 days)
+  have the shortest histories.
+- Data-grain finding: `total_orders` varies slightly within warehouse-days —
+  order queries aggregate its per-warehouse-day mean (documented, explicit in SQL).
+
 ### Checkpoint 03 — PostgreSQL schema + loading
 - Applied `sql/ddl/001_schema.sql`: dedicated `rohlik` schema, tables
   (`warehouses`, `inventory`, `calendar`, `sales_train`, `sales_test`,

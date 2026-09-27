@@ -5,13 +5,10 @@ portfolio project covering data validation, SQL analytics, time-series
 forecasting, stockout risk, recommendations, a what-if simulator, an API, and
 a dashboard.
 
-**Status: Checkpoint 03 — data loaded into PostgreSQL.** Real profile: 4.0M
-daily sales rows, 7 warehouses, 2020-08-01 → 2024-06-02, 5,390
-product-warehouse series. First validation run: overall WARN (52 null target
-rows; 61 missing calendar days across 2 warehouses; 32 rows with corrupt
-discount fractions; 42 metadata-only inventory ids) — all quantified in
-`docs/DATASET.md`, evidence in `data_quality_reports/`. All tables are loaded
-in the `rohlik` schema with row counts verified against the raw CSVs.
+**Status: Checkpoint 04 — SQL analytics layer complete.** All tables are
+loaded in the `rohlik` schema with row counts verified against the raw CSVs,
+and 18 business-question queries run against them (`docs/SQL_CATALOG.md`,
+outputs in `data/processed/analytics/`).
 
 ## Current state
 
