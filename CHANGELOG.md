@@ -2,6 +2,25 @@
 
 ## 2026-09-28
 
+### Checkpoint 08 — Recommendation engine
+- Added `recommendations.py`: converts risk rows into deterministic,
+  versioned recommendations. Production principles: input contract (schema
+  drift raises loudly), rule IDs + engine version stamped on every row,
+  labeled ASSUMED parameters (10% safety margin, pack size 5), total action
+  coverage (unknown tiers degrade to monitor; availability data gaps get
+  `investigate_data` instead of a stock order).
+- Quantity formula: ceil(unmet × 1.10 / pack) × pack — invariants tested:
+  never under-covers, over-cover bounded, always a pack multiple, zero-unmet
+  → zero units.
+- Real-data run: 3,739 recommendations — 1,051 replenish_now,
+  729 replenish_scheduled, 1,822 monitor, 137 investigate_data. Every row
+  carries a rationale with its actual numbers. Outputs:
+  `data/processed/recommendations/recommendations.csv`,
+  `experiments/recommendations_summary.json` + run manifest.
+- 30 new tests: contract failures, quantity properties across magnitudes,
+  boundary mappings, degradation paths, output-shape contract, determinism.
+  74/74 tests pass.
+
 ### Checkpoint 07 — Stockout risk engine
 - Added `risk.py`: deterministic availability-aware risk scoring over the
   forecast horizon. Every field is labeled OBSERVED (recent availability),

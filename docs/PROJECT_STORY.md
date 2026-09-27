@@ -2,7 +2,7 @@
 
 *(A plain-language tour of this project: why it exists, how it fits together,
 what is already built, and what is still on the road ahead. Last updated:
-Checkpoint 07, 2026-09-28. This file is refreshed as milestones land.)*
+Checkpoint 08, 2026-09-28. This file is refreshed as milestones land.)*
 
 ---
 
@@ -88,17 +88,16 @@ repository.
 | **Testing** | 37 automated tests passing — including nasty-input tests proving the validator *fails loudly* on bad data, a leakage test proving a demand spike inside the test window cannot leak into features, and forecasting tests covering gap-filled histories and cold-start products. |
 
 | **Stockout risk engine** | Each product-warehouse is scored for the next 28 days: forecast demand (from the ML model) against its observed shelf availability. Because the data has no inventory counts or supplier lead times, the engine says exactly what it knows — history is OBSERVED, forecasts DERIVED, and the assumption "next month's availability looks like last month's" is labeled ASSUMED, never passed off as fact. Result on real data: 1,051 high-risk, 729 medium, 1,959 low — the high-risk list is dominated by high-volume products running at 50–64% availability. |
-| **Testing** | 44 automated tests passing — validator fails-loudly tests, the leakage-spike test, gap/cold-start forecasting regressions, and risk-engine boundary cases (zero demand, zero availability, missing history, determinism). |
+| **Recommendation engine** | The risk list becomes plain instructions, versioned like production software: every row carries a rule ID, an engine version, a rationale containing its own actual numbers, and its labeled assumptions. 1,051 products get "replenish now" (with a labeled 10% safety margin, packed in fives), 729 go into the next ordering cycle, 1,822 need only monitoring — and 137 with missing availability telemetry get a "fix the data feed" instruction instead of a blind stock order. |
+| **Testing** | 74 automated tests passing — validator fails-loudly tests, the leakage-spike test, forecasting gap/cold-start regressions, risk-engine boundary cases, and a 30-test recommendation battery covering input-contract failures, quantity invariants across magnitudes, degradation paths, and determinism. |
 
 ## 5. What is being worked on now 🔨
 
-- **Recommendation engine (Checkpoint 08):** turning HIGH/MEDIUM risk rows
-  into deterministic replenishment suggestions with printed assumptions.
+- **What-if simulator (Checkpoint 09):** promotion/holiday/demand scenarios
+  computed on top of the frozen forecasts — never touching history.
 
 ## 6. What is deliberately still ahead ⏳
 
-- **Recommendation engine** — deterministic replenishment suggestions with
-  printed assumptions.
 - **What-if simulator** — promotion/holiday/demand scenarios on top of
   forecasts, never touching history.
 - **FastAPI service** — `/health`, `/forecast`, `/risk`, `/recommendations`,

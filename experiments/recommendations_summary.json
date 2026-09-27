@@ -1,0 +1,78 @@
+{
+  "generated_at": "2026-09-27T20:26:15.190446+00:00",
+  "engine_version": "1.0.0",
+  "input_rows": 3739,
+  "recommendation_rows": 3739,
+  "action_counts": {
+    "monitor": 1822,
+    "replenish_now": 1051,
+    "replenish_scheduled": 729,
+    "investigate_data": 137
+  },
+  "assumed_parameters": {
+    "safety_margin": 0.1,
+    "pack_size": 5
+  },
+  "top_replenish_now": [
+    {
+      "name": "Berry_1",
+      "warehouse": "Prague_1",
+      "recommended_units": 10405,
+      "estimated_unmet_units": 9456.86
+    },
+    {
+      "name": "Berry_1",
+      "warehouse": "Brno_1",
+      "recommended_units": 7760,
+      "estimated_unmet_units": 7054.13
+    },
+    {
+      "name": "Berry_1",
+      "warehouse": "Prague_2",
+      "recommended_units": 7600,
+      "estimated_unmet_units": 6907.13
+    },
+    {
+      "name": "Watermelon_17",
+      "warehouse": "Brno_1",
+      "recommended_units": 6215,
+      "estimated_unmet_units": 5647.23
+    },
+    {
+      "name": "Berry_1",
+      "warehouse": "Prague_3",
+      "recommended_units": 5705,
+      "estimated_unmet_units": 5183.5
+    },
+    {
+      "name": "Strawberry_7",
+      "warehouse": "Budapest_1",
+      "recommended_units": 5650,
+      "estimated_unmet_units": 5134.91
+    },
+    {
+      "name": "Kohlrabi_10",
+      "warehouse": "Prague_1",
+      "recommended_units": 5210,
+      "estimated_unmet_units": 4732.1
+    },
+    {
+      "name": "Kohlrabi_10",
+      "warehouse": "Brno_1",
+      "recommended_units": 4740,
+      "estimated_unmet_units": 4305.48
+    },
+    {
+      "name": "Roll_5",
+      "warehouse": "Brno_1",
+      "recommended_units": 4600,
+      "estimated_unmet_units": 4179.18
+    },
+    {
+      "name": "Blueberry_17",
+      "warehouse": "Prague_1",
+      "recommended_units": 3785,
+      "estimated_unmet_units": 3436.74
+    }
+  ]
+}

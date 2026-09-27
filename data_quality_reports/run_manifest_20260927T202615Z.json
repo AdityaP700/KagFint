@@ -1,0 +1,19 @@
+{
+  "run_id": "d578c8eb-f81e-490d-af88-6c16055245fa",
+  "timestamp": "2026-09-27T20:26:15.196027+00:00",
+  "pipeline_version": "0.1.0",
+  "git_commit": "c9fc3341eee3c164d1154c20be491d84fcc5e45a",
+  "kind": "recommendations",
+  "inputs": {
+    "risk_rows": 3739
+  },
+  "outputs": {
+    "recommendations": "data\\processed\\recommendations\\recommendations.csv",
+    "summary": "experiments\\recommendations_summary.json"
+  },
+  "validation": {
+    "overall": "PASS",
+    "engine_version": "1.0.0",
+    "note": "deterministic; input contract enforced"
+  }
+}
