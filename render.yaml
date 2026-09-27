@@ -1,0 +1,15 @@
+# Render.com blueprint — free tier web service for the DemandOps API.
+# In the Render dashboard, choose "Blueprint" instead of "Web Service" and
+# this file configures everything. The API serves frozen artifacts; no
+# database connection is required for any endpoint.
+services:
+  - type: web
+    name: demandops-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: PYTHONPATH=src uvicorn demandops.api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9

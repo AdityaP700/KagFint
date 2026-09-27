@@ -1,0 +1,6 @@
+price_band,n_observations,avg_daily_sales_per_sku
+a_under_2,203451,144.08
+b_2_to_5,235671,292.2
+c_5_to_15,325704,175.22
+d_15_to_50,1380733,102.95
+e_over_50,1861860,73.55

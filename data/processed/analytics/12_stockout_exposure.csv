@@ -1,0 +1,22 @@
+warehouse,category,low_availability_rows,n_rows,avg_availability
+Prague_2,Bakery,24817,287366,0.889
+Prague_3,Fruit and vegetable,23563,380684,0.923
+Prague_1,Fruit and vegetable,21836,383035,0.928
+Prague_2,Fruit and vegetable,19923,382662,0.936
+Brno_1,Fruit and vegetable,19910,336913,0.927
+Budapest_1,Fruit and vegetable,17532,269634,0.922
+Prague_3,Bakery,15224,298221,0.91
+Prague_1,Bakery,11929,296541,0.915
+Brno_1,Bakery,7834,220919,0.924
+Munich_1,Fruit and vegetable,7766,162131,0.938
+Budapest_1,Bakery,7275,228938,0.945
+Prague_1,Meat and fish,6384,100990,0.919
+Prague_3,Meat and fish,6202,100750,0.922
+Prague_2,Meat and fish,5671,100681,0.926
+Frankfurt_1,Fruit and vegetable,4992,108651,0.942
+Budapest_1,Meat and fish,4841,76010,0.915
+Brno_1,Meat and fish,4743,85805,0.925
+Munich_1,Bakery,2009,82467,0.968
+Frankfurt_1,Bakery,1575,78406,0.974
+Munich_1,Meat and fish,665,14735,0.944
+Frankfurt_1,Meat and fish,354,11880,0.958

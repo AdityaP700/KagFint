@@ -32,3 +32,7 @@ logs/
 *.db
 *.sqlite
 *.dump
+
+# Evidence build dirs
+.svelte-kit/
+.npm-cache/

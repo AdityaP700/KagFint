@@ -1,0 +1,6 @@
+discount_band,n_observations,avg_sales_per_sku
+0_no_promo,3421900,102.97
+1_shallow,143349,42.6
+2_moderate,314104,122.31
+3_deep,111035,301.22
+4_very_deep,16999,235.29

@@ -1,0 +1,61 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'>
+<title>DemandOps — Decision Dashboard</title>
+<style>
+body{font-family:'Segoe UI',system-ui,sans-serif;margin:0;background:#f4f6f8;color:#1c2733}
+header{background:#12283f;color:#fff;padding:24px 36px}
+header h1{margin:0;font-size:22px} header p{margin:4px 0 0;color:#9fb3c8;font-size:13px}
+main{padding:24px 36px;max-width:1100px;margin:auto}
+.kpis{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.kpi{flex:1;min-width:180px;background:#fff;border-radius:10px;padding:18px 20px;
+     box-shadow:0 1px 3px rgba(16,24,40,.08)}
+.kpi .v{font-size:26px;font-weight:700}.kpi .l{font-size:12px;color:#66758a;margin-top:4px}
+h2{font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:#5a6b7f;
+   border-bottom:2px solid #e3e9ef;padding-bottom:6px;margin-top:34px}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;
+      overflow:hidden;box-shadow:0 1px 3px rgba(16,24,40,.08);font-size:13px}
+th{background:#eef2f6;text-align:left;padding:9px 12px;font-size:12px;color:#415062}
+td{padding:8px 12px;border-top:1px solid #eef2f6}
+.badge{padding:2px 10px;border-radius:10px;font-size:11px;font-weight:600}
+.HIGH{background:#fde3e1;color:#b3261e}.MEDIUM{background:#fdf0d5;color:#8a6d00}
+.LOW{background:#e1f2e6;color:#1e7b34}
+.bar{background:#2e6fb7;height:14px;border-radius:3px;min-width:2px}
+.bar.green{background:#2f9e5b}
+.note{font-size:12px;color:#66758a;margin-top:8px}
+</style></head><body>
+<header><h1>DemandOps — Demand &amp; Inventory Decision Dashboard</h1>
+<p>Rohlik dataset · 28-day horizon · generated 2026-09-27 21:27 UTC · all figures from pipeline-validated artifacts</p></header><main>
+<div class='kpis'>
+<div class='kpi'><div class='v'>25.2%</div><div class='l'>Forecast error (WMAPE, XGBoost GPU)</div></div>
+<div class='kpi'><div class='v'>10,372,810</div><div class='l'>Forecast units, next 28 days</div></div>
+<div class='kpi'><div class='v'>646,224</div><div class='l'>Units at risk (availability-adjusted)</div></div>
+<div class='kpi'><div class='v'>1,051</div><div class='l'>HIGH-risk product-warehouses</div></div>
+</div>
+<h2>Forecast quality (temporal holdout)</h2><table><tr><th>Model</th><th>WMAPE</th><th>Weighted WMAPE</th><th>MAE</th></tr>
+<tr><td>seasonal_naive_7</td><td>33.7%</td><td>47.3%</td><td>39.49</td></tr>
+<tr><td>moving_average_28</td><td>31.6%</td><td>41.3%</td><td>37.03</td></tr>
+<tr><td><b>xgboost_hist_cuda (GPU)</b></td><td><b>25.2%</b></td><td><b>31.7%</b></td><td><b>29.47</b></td></tr>
+</table><div class='note'>Chronological split: models train on the past, score on the final 28 days. Weighted = competition WMAPE weights.</div>
+<h2>Stockout risk tiers</h2><table>
+<tr><td><span class='badge HIGH'>HIGH</span></td><td>1,051</td><td style='width:50%'><div class="bar " style="width:53.6%"></div></td></tr>
+<tr><td><span class='badge MEDIUM'>MEDIUM</span></td><td>729</td><td style='width:50%'><div class="bar " style="width:37.2%"></div></td></tr>
+<tr><td><span class='badge LOW'>LOW</span></td><td>1,959</td><td style='width:50%'><div class="bar " style="width:100.0%"></div></td></tr>
+</table><div class='note'>OBSERVED availability · DERIVED forecasts · ASSUMED future availability = recent availability.</div>
+<h2>Top HIGH-risk products</h2><table><tr><th>Product</th><th>Warehouse</th><th>Forecast units (28d)</th><th>Observed availability</th><th>Units at risk</th></tr>
+<tr><td>Berry_1</td><td>Prague_1</td><td>26,200</td><td>64%</td><td>9,457</td></tr>
+<tr><td>Berry_1</td><td>Brno_1</td><td>14,280</td><td>51%</td><td>7,054</td></tr>
+<tr><td>Berry_1</td><td>Prague_2</td><td>12,884</td><td>46%</td><td>6,907</td></tr>
+<tr><td>Watermelon_17</td><td>Brno_1</td><td>25,837</td><td>78%</td><td>5,647</td></tr>
+<tr><td>Berry_1</td><td>Prague_3</td><td>14,090</td><td>63%</td><td>5,184</td></tr>
+<tr><td>Strawberry_7</td><td>Budapest_1</td><td>10,747</td><td>52%</td><td>5,135</td></tr>
+<tr><td>Kohlrabi_10</td><td>Prague_1</td><td>26,713</td><td>82%</td><td>4,732</td></tr>
+<tr><td>Kohlrabi_10</td><td>Brno_1</td><td>28,630</td><td>85%</td><td>4,305</td></tr>
+<tr><td>Roll_5</td><td>Brno_1</td><td>21,471</td><td>81%</td><td>4,179</td></tr>
+<tr><td>Blueberry_17</td><td>Prague_1</td><td>22,670</td><td>85%</td><td>3,437</td></tr>
+</table>
+<h2>Recommended actions</h2><table>
+<tr><td>monitor</td><td>1,822 series</td></tr>
+<tr><td>replenish_now</td><td>1,051 series</td></tr>
+<tr><td>replenish_scheduled</td><td>729 series</td></tr>
+<tr><td>investigate_data</td><td>137 series</td></tr>
+</table><div class='note'>Versioned engine output; quantities include a labeled +10% safety margin. Data-gap series get a data-fix action, not a stock order.</div>
+</main></body></html>
