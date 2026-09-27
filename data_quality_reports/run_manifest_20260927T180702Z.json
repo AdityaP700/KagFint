@@ -1,0 +1,23 @@
+{
+  "run_id": "8ac38ac1-7023-4e44-9be7-4f6da6f8d074",
+  "timestamp": "2026-09-27T18:07:02.963213+00:00",
+  "pipeline_version": "0.1.0",
+  "git_commit": "105b1d83e42d536dc10984f4d771f5a4762eb66d",
+  "kind": "ingestion_validation",
+  "inputs": {
+    "sales_train": 4007419,
+    "sales_test": 47021,
+    "inventory": 5432,
+    "calendar": 23016,
+    "test_weights": 5390
+  },
+  "outputs": {
+    "validation_report": "data_quality_reports\\validation_report_20260927T180702Z.json"
+  },
+  "validation": {
+    "PASS": 25,
+    "WARN": 4,
+    "FAIL": 0,
+    "overall": "WARN"
+  }
+}

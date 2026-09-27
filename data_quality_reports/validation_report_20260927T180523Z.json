@@ -1,0 +1,357 @@
+{
+  "generated_at": "2026-09-27T18:05:23.976123+00:00",
+  "summary": {
+    "PASS": 25,
+    "WARN": 3,
+    "FAIL": 1,
+    "overall": "FAIL"
+  },
+  "checks": [
+    {
+      "name": "schema",
+      "table": "sales_train",
+      "status": "PASS",
+      "details": {
+        "missing_columns": [],
+        "unexpected_columns": [],
+        "dtype_mismatches": {}
+      }
+    },
+    {
+      "name": "missingness",
+      "table": "sales_train",
+      "status": "WARN",
+      "details": {
+        "columns_affected": {
+          "total_orders": {
+            "count": 52,
+            "pct": 1.3e-05
+          },
+          "sales": {
+            "count": 52,
+            "pct": 1.3e-05
+          }
+        },
+        "worst_pct": 1.3e-05
+      }
+    },
+    {
+      "name": "duplicates",
+      "table": "sales_train",
+      "status": "PASS",
+      "details": {
+        "key": [
+          "unique_id",
+          "date"
+        ],
+        "duplicate_rows": 0,
+        "duplicate_key_groups": 0
+      }
+    },
+    {
+      "name": "date_continuity",
+      "table": "sales_train",
+      "status": "WARN",
+      "details": {
+        "missing_days_by_group": {
+          "Frankfurt_1": 53,
+          "Munich_1": 8
+        },
+        "min_date": "2020-08-01",
+        "max_date": "2024-06-02"
+      }
+    },
+    {
+      "name": "numeric_sanity",
+      "table": "sales_train",
+      "status": "FAIL",
+      "details": {
+        "impossible_values": {
+          "negative_sales": 0,
+          "negative_price": 0,
+          "availability_outside_0_1": 0,
+          "type_0_discount_negative": 27,
+          "type_1_discount_negative": 0,
+          "type_2_discount_negative": 0,
+          "type_3_discount_negative": 0,
+          "type_4_discount_negative": 1,
+          "type_5_discount_negative": 0,
+          "type_6_discount_negative": 4
+        },
+        "outliers": {
+          "type_0_discount_above_1": 0,
+          "type_1_discount_above_1": 0,
+          "type_2_discount_above_1": 0,
+          "type_3_discount_above_1": 0,
+          "type_4_discount_above_1": 0,
+          "type_5_discount_above_1": 0,
+          "type_6_discount_above_1": 0
+        }
+      }
+    },
+    {
+      "name": "schema",
+      "table": "sales_test",
+      "status": "PASS",
+      "details": {
+        "missing_columns": [],
+        "unexpected_columns": [],
+        "dtype_mismatches": {}
+      }
+    },
+    {
+      "name": "missingness",
+      "table": "sales_test",
+      "status": "PASS",
+      "details": {
+        "columns_affected": {}
+      }
+    },
+    {
+      "name": "duplicates",
+      "table": "sales_test",
+      "status": "PASS",
+      "details": {
+        "key": [
+          "unique_id",
+          "date"
+        ],
+        "duplicate_rows": 0,
+        "duplicate_key_groups": 0
+      }
+    },
+    {
+      "name": "date_continuity",
+      "table": "sales_test",
+      "status": "PASS",
+      "details": {
+        "missing_days_by_group": {},
+        "min_date": "2024-06-03",
+        "max_date": "2024-06-16"
+      }
+    },
+    {
+      "name": "numeric_sanity",
+      "table": "sales_test",
+      "status": "PASS",
+      "details": {
+        "impossible_values": {
+          "negative_price": 0,
+          "type_0_discount_negative": 0,
+          "type_1_discount_negative": 0,
+          "type_2_discount_negative": 0,
+          "type_3_discount_negative": 0,
+          "type_4_discount_negative": 0,
+          "type_5_discount_negative": 0,
+          "type_6_discount_negative": 0
+        },
+        "outliers": {
+          "type_0_discount_above_1": 0,
+          "type_1_discount_above_1": 0,
+          "type_2_discount_above_1": 0,
+          "type_3_discount_above_1": 0,
+          "type_4_discount_above_1": 0,
+          "type_5_discount_above_1": 0,
+          "type_6_discount_above_1": 0
+        }
+      }
+    },
+    {
+      "name": "schema",
+      "table": "inventory",
+      "status": "PASS",
+      "details": {
+        "missing_columns": [],
+        "unexpected_columns": [],
+        "dtype_mismatches": {}
+      }
+    },
+    {
+      "name": "missingness",
+      "table": "inventory",
+      "status": "PASS",
+      "details": {
+        "columns_affected": {}
+      }
+    },
+    {
+      "name": "duplicates",
+      "table": "inventory",
+      "status": "PASS",
+      "details": {
+        "key": [
+          "unique_id"
+        ],
+        "duplicate_rows": 0,
+        "duplicate_key_groups": 0
+      }
+    },
+    {
+      "name": "date_continuity",
+      "table": "inventory",
+      "status": "PASS",
+      "details": {
+        "skipped": "no date column or empty table"
+      }
+    },
+    {
+      "name": "numeric_sanity",
+      "table": "inventory",
+      "status": "PASS",
+      "details": {
+        "impossible_values": {},
+        "outliers": {}
+      }
+    },
+    {
+      "name": "schema",
+      "table": "calendar",
+      "status": "PASS",
+      "details": {
+        "missing_columns": [],
+        "unexpected_columns": [],
+        "dtype_mismatches": {}
+      }
+    },
+    {
+      "name": "missingness",
+      "table": "calendar",
+      "status": "PASS",
+      "details": {
+        "columns_affected": {
+          "holiday_name": {
+            "count": 22086,
+            "pct": 0.959593
+          }
+        },
+        "note": "nulls are nullable-by-design columns"
+      }
+    },
+    {
+      "name": "duplicates",
+      "table": "calendar",
+      "status": "PASS",
+      "details": {
+        "key": [
+          "warehouse",
+          "date"
+        ],
+        "duplicate_rows": 0,
+        "duplicate_key_groups": 0
+      }
+    },
+    {
+      "name": "date_continuity",
+      "table": "calendar",
+      "status": "PASS",
+      "details": {
+        "missing_days_by_group": {},
+        "min_date": "2016-01-01",
+        "max_date": "2024-12-31"
+      }
+    },
+    {
+      "name": "numeric_sanity",
+      "table": "calendar",
+      "status": "PASS",
+      "details": {
+        "impossible_values": {},
+        "outliers": {}
+      }
+    },
+    {
+      "name": "schema",
+      "table": "test_weights",
+      "status": "PASS",
+      "details": {
+        "missing_columns": [],
+        "unexpected_columns": [],
+        "dtype_mismatches": {}
+      }
+    },
+    {
+      "name": "missingness",
+      "table": "test_weights",
+      "status": "PASS",
+      "details": {
+        "columns_affected": {}
+      }
+    },
+    {
+      "name": "duplicates",
+      "table": "test_weights",
+      "status": "PASS",
+      "details": {
+        "key": [
+          "unique_id"
+        ],
+        "duplicate_rows": 0,
+        "duplicate_key_groups": 0
+      }
+    },
+    {
+      "name": "date_continuity",
+      "table": "test_weights",
+      "status": "PASS",
+      "details": {
+        "skipped": "no date column or empty table"
+      }
+    },
+    {
+      "name": "numeric_sanity",
+      "table": "test_weights",
+      "status": "PASS",
+      "details": {
+        "impossible_values": {},
+        "outliers": {}
+      }
+    },
+    {
+      "name": "referential_unique_id->inventory",
+      "table": "sales_train",
+      "status": "PASS",
+      "details": {
+        "unknown_key_rows": 0,
+        "unknown_key_examples": []
+      }
+    },
+    {
+      "name": "referential_unique_id->inventory",
+      "table": "sales_test",
+      "status": "PASS",
+      "details": {
+        "unknown_key_rows": 0,
+        "unknown_key_examples": []
+      }
+    },
+    {
+      "name": "referential_unique_id->inventory",
+      "table": "test_weights",
+      "status": "PASS",
+      "details": {
+        "unknown_key_rows": 0,
+        "unknown_key_examples": []
+      }
+    },
+    {
+      "name": "coverage_unique_id_not_in_sales_train",
+      "table": "inventory",
+      "status": "WARN",
+      "details": {
+        "extra_key_rows": 42,
+        "extra_key_examples": [
+          "1220",
+          "1702",
+          "2298",
+          "3352",
+          "381",
+          "3963",
+          "4317",
+          "4386",
+          "4387",
+          "838"
+        ]
+      }
+    }
+  ]
+}

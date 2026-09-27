@@ -1,0 +1,371 @@
+{
+  "generated_at": "2026-09-27T18:03:13.887281+00:00",
+  "summary": {
+    "PASS": 19,
+    "WARN": 2,
+    "FAIL": 8,
+    "overall": "FAIL"
+  },
+  "checks": [
+    {
+      "name": "schema",
+      "table": "sales_train",
+      "status": "FAIL",
+      "details": {
+        "missing_columns": [],
+        "unexpected_columns": [],
+        "dtype_mismatches": {
+          "unique_id": "int64",
+          "total_orders": "float64",
+          "sales": "float64",
+          "sell_price_main": "float64",
+          "availability": "float64",
+          "type_0_discount": "float64",
+          "type_1_discount": "float64",
+          "type_2_discount": "float64",
+          "type_3_discount": "float64",
+          "type_4_discount": "float64",
+          "type_5_discount": "float64",
+          "type_6_discount": "float64"
+        }
+      }
+    },
+    {
+      "name": "missingness",
+      "table": "sales_train",
+      "status": "WARN",
+      "details": {
+        "columns_affected": {
+          "total_orders": {
+            "count": 52,
+            "pct": 1.3e-05
+          },
+          "sales": {
+            "count": 52,
+            "pct": 1.3e-05
+          }
+        },
+        "worst_pct": 1.3e-05
+      }
+    },
+    {
+      "name": "duplicates",
+      "table": "sales_train",
+      "status": "PASS",
+      "details": {
+        "key": [
+          "unique_id",
+          "date"
+        ],
+        "duplicate_rows": 0,
+        "duplicate_key_groups": 0
+      }
+    },
+    {
+      "name": "date_continuity",
+      "table": "sales_train",
+      "status": "WARN",
+      "details": {
+        "missing_days_by_group": {
+          "Frankfurt_1": 53,
+          "Munich_1": 8
+        },
+        "min_date": "2020-08-01",
+        "max_date": "2024-06-02"
+      }
+    },
+    {
+      "name": "numeric_sanity",
+      "table": "sales_train",
+      "status": "FAIL",
+      "details": {
+        "violations": {
+          "negative_sales": 0,
+          "negative_price": 0,
+          "availability_outside_0_1": 0,
+          "type_0_discount_outside_0_1": 27,
+          "type_1_discount_outside_0_1": 0,
+          "type_2_discount_outside_0_1": 0,
+          "type_3_discount_outside_0_1": 0,
+          "type_4_discount_outside_0_1": 1,
+          "type_5_discount_outside_0_1": 0,
+          "type_6_discount_outside_0_1": 4
+        }
+      }
+    },
+    {
+      "name": "schema",
+      "table": "sales_test",
+      "status": "FAIL",
+      "details": {
+        "missing_columns": [],
+        "unexpected_columns": [],
+        "dtype_mismatches": {
+          "unique_id": "int64",
+          "total_orders": "float64",
+          "sell_price_main": "float64",
+          "type_0_discount": "float64",
+          "type_1_discount": "float64",
+          "type_2_discount": "float64",
+          "type_3_discount": "float64",
+          "type_4_discount": "float64",
+          "type_5_discount": "float64",
+          "type_6_discount": "float64"
+        }
+      }
+    },
+    {
+      "name": "missingness",
+      "table": "sales_test",
+      "status": "PASS",
+      "details": {
+        "columns_affected": {}
+      }
+    },
+    {
+      "name": "duplicates",
+      "table": "sales_test",
+      "status": "PASS",
+      "details": {
+        "key": [
+          "unique_id",
+          "date"
+        ],
+        "duplicate_rows": 0,
+        "duplicate_key_groups": 0
+      }
+    },
+    {
+      "name": "date_continuity",
+      "table": "sales_test",
+      "status": "PASS",
+      "details": {
+        "missing_days_by_group": {},
+        "min_date": "2024-06-03",
+        "max_date": "2024-06-16"
+      }
+    },
+    {
+      "name": "numeric_sanity",
+      "table": "sales_test",
+      "status": "PASS",
+      "details": {
+        "violations": {
+          "negative_price": 0,
+          "type_0_discount_outside_0_1": 0,
+          "type_1_discount_outside_0_1": 0,
+          "type_2_discount_outside_0_1": 0,
+          "type_3_discount_outside_0_1": 0,
+          "type_4_discount_outside_0_1": 0,
+          "type_5_discount_outside_0_1": 0,
+          "type_6_discount_outside_0_1": 0
+        }
+      }
+    },
+    {
+      "name": "schema",
+      "table": "inventory",
+      "status": "FAIL",
+      "details": {
+        "missing_columns": [],
+        "unexpected_columns": [],
+        "dtype_mismatches": {
+          "unique_id": "int64",
+          "product_unique_id": "int64"
+        }
+      }
+    },
+    {
+      "name": "missingness",
+      "table": "inventory",
+      "status": "PASS",
+      "details": {
+        "columns_affected": {}
+      }
+    },
+    {
+      "name": "duplicates",
+      "table": "inventory",
+      "status": "PASS",
+      "details": {
+        "key": [
+          "unique_id"
+        ],
+        "duplicate_rows": 0,
+        "duplicate_key_groups": 0
+      }
+    },
+    {
+      "name": "date_continuity",
+      "table": "inventory",
+      "status": "PASS",
+      "details": {
+        "skipped": "no date column or empty table"
+      }
+    },
+    {
+      "name": "numeric_sanity",
+      "table": "inventory",
+      "status": "PASS",
+      "details": {
+        "violations": {}
+      }
+    },
+    {
+      "name": "schema",
+      "table": "calendar",
+      "status": "FAIL",
+      "details": {
+        "missing_columns": [],
+        "unexpected_columns": [],
+        "dtype_mismatches": {
+          "holiday": "int64",
+          "shops_closed": "int64",
+          "winter_school_holidays": "int64",
+          "school_holidays": "int64"
+        }
+      }
+    },
+    {
+      "name": "missingness",
+      "table": "calendar",
+      "status": "FAIL",
+      "details": {
+        "columns_affected": {
+          "holiday_name": {
+            "count": 22086,
+            "pct": 0.959593
+          }
+        },
+        "worst_pct": 0.959593
+      }
+    },
+    {
+      "name": "duplicates",
+      "table": "calendar",
+      "status": "PASS",
+      "details": {
+        "key": [
+          "warehouse",
+          "date"
+        ],
+        "duplicate_rows": 0,
+        "duplicate_key_groups": 0
+      }
+    },
+    {
+      "name": "date_continuity",
+      "table": "calendar",
+      "status": "PASS",
+      "details": {
+        "missing_days_by_group": {},
+        "min_date": "2016-01-01",
+        "max_date": "2024-12-31"
+      }
+    },
+    {
+      "name": "numeric_sanity",
+      "table": "calendar",
+      "status": "PASS",
+      "details": {
+        "violations": {}
+      }
+    },
+    {
+      "name": "schema",
+      "table": "test_weights",
+      "status": "FAIL",
+      "details": {
+        "missing_columns": [],
+        "unexpected_columns": [],
+        "dtype_mismatches": {
+          "unique_id": "int64",
+          "weight": "float64"
+        }
+      }
+    },
+    {
+      "name": "missingness",
+      "table": "test_weights",
+      "status": "PASS",
+      "details": {
+        "columns_affected": {}
+      }
+    },
+    {
+      "name": "duplicates",
+      "table": "test_weights",
+      "status": "PASS",
+      "details": {
+        "key": [
+          "unique_id"
+        ],
+        "duplicate_rows": 0,
+        "duplicate_key_groups": 0
+      }
+    },
+    {
+      "name": "date_continuity",
+      "table": "test_weights",
+      "status": "PASS",
+      "details": {
+        "skipped": "no date column or empty table"
+      }
+    },
+    {
+      "name": "numeric_sanity",
+      "table": "test_weights",
+      "status": "PASS",
+      "details": {
+        "violations": {}
+      }
+    },
+    {
+      "name": "referential_unique_id->inventory",
+      "table": "sales_train",
+      "status": "PASS",
+      "details": {
+        "unknown_key_rows": 0,
+        "unknown_key_examples": []
+      }
+    },
+    {
+      "name": "referential_unique_id->sales_train",
+      "table": "inventory",
+      "status": "FAIL",
+      "details": {
+        "unknown_key_rows": 42,
+        "unknown_key_examples": [
+          "1220",
+          "1702",
+          "2298",
+          "3352",
+          "381",
+          "3963",
+          "4317",
+          "4386",
+          "4387",
+          "838"
+        ]
+      }
+    },
+    {
+      "name": "referential_unique_id->inventory",
+      "table": "sales_test",
+      "status": "PASS",
+      "details": {
+        "unknown_key_rows": 0,
+        "unknown_key_examples": []
+      }
+    },
+    {
+      "name": "referential_unique_id->inventory",
+      "table": "test_weights",
+      "status": "PASS",
+      "details": {
+        "unknown_key_rows": 0,
+        "unknown_key_examples": []
+      }
+    }
+  ]
+}

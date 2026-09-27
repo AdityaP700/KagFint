@@ -5,9 +5,12 @@ portfolio project covering data validation, SQL analytics, time-series
 forecasting, stockout risk, recommendations, a what-if simulator, an API, and
 a dashboard.
 
-**Status: Checkpoint 01 — project structure initialized. No data, pipeline, or
-models exist yet.** This README describes only what is implemented; it is
-updated as milestones complete.
+**Status: Checkpoint 02 — dataset acquired; ingestion + validation layer built
+and run.** Real profile: 4.0M daily sales rows, 7 warehouses, 2020-08-01 →
+2024-06-02, 5,390 product-warehouse series. First validation run: overall WARN
+(52 null target rows; 61 missing calendar days across 2 warehouses; 32 rows
+with corrupt discount fractions; 42 metadata-only inventory ids) — all
+quantified in `docs/DATASET.md`, evidence in `data_quality_reports/`.
 
 ## Current state
 
