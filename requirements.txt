@@ -3,4 +3,10 @@ pandas>=2.2
 numpy>=1.26
 python-dotenv>=1.0
 sqlalchemy>=2.0
+psycopg[binary]>=3.1
 pytest>=8.0
+kaggle>=1.6
+# GBM: LightGBM's Windows wheel ships without GPU support (verified 2026-09-28,
+# both device='gpu' and device='cuda' fail); XGBoost's wheel includes CUDA.
+xgboost>=3.0
+scikit-learn>=1.5

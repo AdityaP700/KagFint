@@ -2,6 +2,27 @@
 
 ## 2026-09-28
 
+### Checkpoint 06 — Gradient-boosted forecasting on GPU
+- Model choice justified and recorded: LightGBM 4.7.0 Windows wheel has no GPU
+  support (verified empirically); XGBoost 3.2.0 wheel includes CUDA and runs on
+  the RTX 4050 Laptop. Plan permits "LightGBM or another justified GBM".
+- Added `features.py`: leak-safe features by construction — weekly lags 28/35/42/56
+  and rolling means shifted 28d (every horizon feature predates the cutoff);
+  price/discounts treated as known (retailer-set, provided by the competition);
+  `total_orders` and `availability` EXCLUDED as leakage (documented).
+  NaN features retained for cold-start series (XGBoost native handling).
+- Added `train_gbm.py`: two-phase protocol — early stopping on an INNER
+  validation window (the 28 days before the holdout), then final fit on all
+  pre-holdout data; holdout touched once. GPU-accelerated (hist/cuda),
+  ~30s per fit on 3.9M rows.
+- **Holdout results (experiments/gbm_results.json):**
+  WMAPE 25.21%, weighted WMAPE 31.78%, MAE 29.51, RMSE 95.73.
+  vs moving_average_28 (WMAPE 31.64% / 41.30%): −6.4 WMAPE points
+  (~20% relative improvement). GBM beats both baselines on all four metrics;
+  result and per-warehouse breakdown recorded, not cherry-picked.
+- 5 feature tests including a leakage-spike test (a holdout-confined demand
+  spike must not appear in any holdout feature). 37/37 tests pass.
+
 ### Checkpoint 05 — Baseline forecasting + evaluation harness
 - Added `metrics.py` (WMAPE incl. competition-weighted variant, MAE, RMSE),
   `baselines.py` (seasonal naive lag-7, moving average 28d) and

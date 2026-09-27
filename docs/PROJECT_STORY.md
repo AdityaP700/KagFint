@@ -2,7 +2,7 @@
 
 *(A plain-language tour of this project: why it exists, how it fits together,
 what is already built, and what is still on the road ahead. Last updated:
-Checkpoint 05, 2026-09-28. This file is refreshed as milestones land.)*
+Checkpoint 06, 2026-09-28. This file is refreshed as milestones land.)*
 
 ---
 
@@ -83,21 +83,18 @@ repository.
 | **Validation gate** | Every table is checked on every run. First run's findings are quantified in `docs/DATASET.md`: 52 rows with missing sales, 61 missing calendar days, 32 rows with corrupt discount values, 42 catalog-only products. Nothing was silently deleted. |
 | **Database loaded** | All tables copied into PostgreSQL with row counts verified against the source files; keys and indexes in place. |
 | **18 SQL analyses** | Real business questions already answered: Friday/Saturday demand peaks (~+22% vs Monday), promotions lift sales ~36%, ~8–9 units per order, which SKUs are most erratic, where stockout exposure concentrates, an estimated "lost sales" upper bound per warehouse. |
-| **Baseline forecasts** | The two honest yardsticks are now measured on a strictly time-ordered test (train on the past, score on the final 28 days): "repeat last week's pattern" scores WMAPE 33.7%, "predict the recent 28-day average" scores 31.6%. The moving average currently leads — and any fancier model (see below) must beat *these numbers* on the identical test or the result gets published anyway. |
-| **Testing** | 32 automated tests passing — including nasty-input tests proving the validator *fails loudly* on bad data, and forecasting tests covering gap-filled histories, cold-start products, and metric edge cases. |
+| **Baseline forecasts** | The two honest yardsticks are now measured on a strictly time-ordered test (train on the past, score on the final 28 days): "repeat last week's pattern" scores WMAPE 33.7%, "predict the recent 28-day average" scores 31.6%. |
+| **Machine-learning forecasts (GPU)** | A gradient-boosted model (XGBoost on the laptop's NVIDIA GPU — chosen over LightGBM because LightGBM's Windows build has no GPU support, verified) trained on leak-safe features: only information that would genuinely be known in advance. It scores **WMAPE 25.2%** — a ~20% relative improvement over the best baseline. Every feature passed a "would we know this at prediction time?" test; demand-observed quantities like shelf availability were deliberately excluded as leakage. |
+| **Testing** | 37 automated tests passing — including nasty-input tests proving the validator *fails loudly* on bad data, a leakage test proving a demand spike inside the test window cannot leak into features, and forecasting tests covering gap-filled histories and cold-start products. |
 
 ## 5. What is being worked on now 🔨
 
-- **LightGBM forecasting (Checkpoint 06):** the machine-learning model with
-  lag/rolling/calendar/promotion features, trained GPU-accelerated (RTX 4050)
-  and evaluated on the *exact same* temporal split as the baselines above.
-  If it fails to beat 31.6% WMAPE, that finding is recorded, not buried.
+- **Stockout risk engine (Checkpoint 07):** combining the trained model's
+  forecasts with the observed availability signal to flag products likely to
+  run short — the bridge from prediction to action.
 
 ## 6. What is deliberately still ahead ⏳
 
-- **LightGBM forecasting (GPU-accelerated)** — the machine-learning model
-  with lag/rolling/calendar/promo features; it must *beat or honestly lose
-  to* the baselines, and either result gets published.
 - **Stockout risk engine** — availability-aware risk scoring (the data has
   an *observed* availability signal, but no inventory-unit counts; that
   limitation is documented, never papered over).

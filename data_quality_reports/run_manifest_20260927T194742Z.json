@@ -1,0 +1,18 @@
+{
+  "run_id": "cb503c81-8e7c-491c-9940-c9a065716ceb",
+  "timestamp": "2026-09-27T19:47:42.677077+00:00",
+  "pipeline_version": "0.1.0",
+  "git_commit": "9d2b13d69342873932d4e52e8db361456b56f615",
+  "kind": "gbm_forecast",
+  "inputs": {
+    "train_rows": 3912496,
+    "holdout_rows": 94871
+  },
+  "outputs": {
+    "gbm_results": "experiments\\gbm_results.json"
+  },
+  "validation": {
+    "overall": "PASS",
+    "note": "same split and gate as baselines"
+  }
+}
