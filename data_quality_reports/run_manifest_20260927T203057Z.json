@@ -1,0 +1,18 @@
+{
+  "run_id": "fb7cba49-89c0-400c-a2fe-c9f63671e308",
+  "timestamp": "2026-09-27T20:30:57.901034+00:00",
+  "pipeline_version": "0.1.0",
+  "git_commit": "525a3c0a50b30777be9429e585646f58ebc89862",
+  "kind": "what_if_simulation",
+  "inputs": {
+    "risk_rows": 3739
+  },
+  "outputs": {
+    "simulation": "data\\processed\\simulations\\simulation_dm1_pu0_ai0.csv",
+    "summary": "experiments\\simulation_dm1_pu0_ai0_summary.json"
+  },
+  "validation": {
+    "overall": "PASS",
+    "note": "baseline columns verified untouched"
+  }
+}

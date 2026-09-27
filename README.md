@@ -5,13 +5,12 @@ portfolio project covering data validation, SQL analytics, time-series
 forecasting, stockout risk, recommendations, a what-if simulator, an API, and
 a dashboard.
 
-**Status: Checkpoint 08 — recommendation engine.** Data loaded in the
-`rohlik` schema, 18 SQL analyses, temporal-split evaluation with baselines
-(moving_average_28 WMAPE 31.6%) and XGBoost (CUDA) forecasting at
-**WMAPE 25.2%**, a labeled-assumption stockout risk engine, and a versioned
-deterministic recommendation layer (1,051 replenish-now / 729 scheduled /
-1,822 monitor / 137 data investigations). Evidence: `experiments/`,
-`data/processed/`. Plain-language tour: `docs/PROJECT_STORY.md`.
+**Status: Checkpoint 09 — what-if simulator.** Forecasting (XGBoost CUDA,
+WMAPE 25.2% vs 31.6% baseline), labeled-assumption risk engine (1,051 HIGH),
+versioned recommendations, and scenario analysis with strict
+BASELINE/SIMULATED separation (identity scenario reproduces the risk table
+exactly at runtime). Evidence: `experiments/`, `data/processed/`.
+Plain-language tour: `docs/PROJECT_STORY.md`.
 
 ## Current state
 

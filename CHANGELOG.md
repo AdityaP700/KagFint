@@ -2,6 +2,26 @@
 
 ## 2026-09-28
 
+### Checkpoint 09 — What-if simulator
+- Added `simulator.py`: scenario analysis over the frozen risk table with
+  strict BASELINE/SIMULATED separation — baseline columns copied and verified
+  untouched; scenario columns exist only in simulator output; historical data
+  never modified (only new files written).
+- Levers: demand multiplier (user-chosen), promotion uplift (default 0.356
+  DERIVED from our SQL finding in `sql/analytics/07`, used as ASSUMED
+  elasticity), availability improvement (ASSUMED operational lever, capped
+  [0,1]). Invalid parameters refused; unsupported levers (inventory, lead
+  time) have no fake implementation — refused by absence, documented.
+- Identity scenario (1.0/0.0/0.0) is a runtime consistency gate: it must
+  reproduce the risk engine's unmet units exactly or the run aborts.
+- Scenario quantities reuse the recommendation engine's formula and ASSUMED
+  parameters for comparability (tested for equality).
+- Real-data runs: identity → 646,224 baseline unmet, delta 0. "Holiday surge
+  +20% demand, +35.6% promo, +0.1 availability" → unmet 646,224 → 325,017
+  (−321,207): fixing availability dominates even under a demand surge.
+- 13 simulator tests (lever math, caps, separation guarantees, refusal of
+  invalid params, engine-formula consistency, determinism). 87/87 pass.
+
 ### Checkpoint 08 — Recommendation engine
 - Added `recommendations.py`: converts risk rows into deterministic,
   versioned recommendations. Production principles: input contract (schema

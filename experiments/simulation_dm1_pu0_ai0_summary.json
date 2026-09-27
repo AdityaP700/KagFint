@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-09-27T20:30:57.899021+00:00",
+  "scenario": {
+    "demand_multiplier": 1.0,
+    "promotion_uplift": 0.0,
+    "availability_improvement": 0.0,
+    "promo_uplift_source": "DERIVED from sql/analytics/07 (+36% aggregate), used as ASSUMED elasticity"
+  },
+  "labels": {
+    "baseline_unmet_units": "BASELINE (frozen risk artifact)",
+    "scenario_unmet_units": "SIMULATED",
+    "historical_data": "UNTOUCHED \u2014 simulator writes only new files"
+  },
+  "series": 3739,
+  "total_baseline_unmet_units": 646224.22,
+  "total_scenario_unmet_units": 646224.22,
+  "unmet_units_delta": 0.0,
+  "total_scenario_recommended_units": 717930
+}

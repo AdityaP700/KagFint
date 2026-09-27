@@ -2,7 +2,7 @@
 
 *(A plain-language tour of this project: why it exists, how it fits together,
 what is already built, and what is still on the road ahead. Last updated:
-Checkpoint 08, 2026-09-28. This file is refreshed as milestones land.)*
+Checkpoint 09, 2026-09-28. This file is refreshed as milestones land.)*
 
 ---
 
@@ -91,15 +91,17 @@ repository.
 | **Recommendation engine** | The risk list becomes plain instructions, versioned like production software: every row carries a rule ID, an engine version, a rationale containing its own actual numbers, and its labeled assumptions. 1,051 products get "replenish now" (with a labeled 10% safety margin, packed in fives), 729 go into the next ordering cycle, 1,822 need only monitoring — and 137 with missing availability telemetry get a "fix the data feed" instruction instead of a blind stock order. |
 | **Testing** | 74 automated tests passing — validator fails-loudly tests, the leakage-spike test, forecasting gap/cold-start regressions, risk-engine boundary cases, and a 30-test recommendation battery covering input-contract failures, quantity invariants across magnitudes, degradation paths, and determinism. |
 
+| **What-if simulator** | A scenario playground over the frozen forecasts: "what if demand surges 20% for the holidays and we also fix a tenth of the availability shortfall?" On real data that combination cuts projected unmet demand nearly in half (646k → 325k units) — fixing availability dominates even during a surge. Guarantees: the baseline columns are copied and verified untouched, history is never modified, and the do-nothing scenario must reproduce the risk engine's numbers exactly or the run aborts. The promotion lever reuses the project's own measured ~36% uplift, honestly labeled an ASSUMED elasticity, not a causal promise. |
+| **Testing** | 87 automated tests passing — validator fails-loudly tests, the leakage-spike test, forecasting gap/cold-start regressions, risk-engine boundary cases, the 30-test recommendation battery, and 13 simulator tests covering lever math, separation guarantees, and refusal of invalid scenarios. |
+
 ## 5. What is being worked on now 🔨
 
-- **What-if simulator (Checkpoint 09):** promotion/holiday/demand scenarios
-  computed on top of the frozen forecasts — never touching history.
+- **FastAPI service (Checkpoint 10):** serving the frozen artifacts
+  (`/health`, `/forecast`, `/risk`, `/recommendations`, `/simulation`) —
+  request handlers never train models.
 
 ## 6. What is deliberately still ahead ⏳
 
-- **What-if simulator** — promotion/holiday/demand scenarios on top of
-  forecasts, never touching history.
 - **FastAPI service** — `/health`, `/forecast`, `/risk`, `/recommendations`,
   `/simulation` endpoints serving pre-computed results (no training inside
   request handlers).
