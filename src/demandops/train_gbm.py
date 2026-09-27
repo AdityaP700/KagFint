@@ -42,6 +42,7 @@ PARAMS = dict(
     eval_metric="mae",
     early_stopping_rounds=50,
     n_jobs=8,
+    random_state=42,
 )
 
 
@@ -83,8 +84,15 @@ def run() -> int:
     print(f"final fit on {len(X_tr_all)} rows ({time.perf_counter() - t2:.1f}s)")
 
     preds = model.predict(holdout[feature_cols])
-    pred_df = holdout[["unique_id", "date"]].copy()
+    pred_df = holdout[["unique_id", "date", "warehouse"]].copy()
     pred_df["prediction"] = preds
+    pred_df["actual"] = holdout["sales"].to_numpy()
+    # Persisted forecasts: downstream layers (risk, recommendations, API)
+    # consume these files; no training happens inside request paths.
+    forecasts_dir = config.PROCESSED_DATA_DIR / "forecasts"
+    forecasts_dir.mkdir(parents=True, exist_ok=True)
+    pred_path = forecasts_dir / "gbm_holdout_predictions.csv"
+    pred_df.to_csv(pred_path, index=False)
 
     weights = load_weights()
     results = evaluate(pred_df, holdout[["unique_id", "date", "warehouse", "sales"]],
