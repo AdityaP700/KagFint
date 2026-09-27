@@ -63,11 +63,13 @@ def _reload(conn: psycopg.Connection, table: str, df: pd.DataFrame) -> None:
     cols = list(df.columns)
     placeholders = ", ".join(["%s"] * len(cols))
     col_list = ", ".join(cols)
+    rows = [tuple(None if pd.isna(v) else v for v in row)
+            for row in df.itertuples(index=False, name=None)]
+    # executemany uses psycopg3 pipeline mode: one round-trip batch instead of
+    # per-row WAN latency.
     with conn.cursor() as cur:
-        for row in df.itertuples(index=False, name=None):
-            values = [None if pd.isna(v) else v for v in row]
-            cur.execute(f"INSERT INTO bi.{table} ({col_list}) "
-                        f"VALUES ({placeholders})", values)
+        cur.executemany(
+            f"INSERT INTO bi.{table} ({col_list}) VALUES ({placeholders})", rows)
     conn.commit()
     print(f"[ok] bi.{table}: {len(df)} rows reloaded")
 
