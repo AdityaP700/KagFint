@@ -1,0 +1,19 @@
+{
+  "run_id": "1ceda646-8153-43b1-9079-93e7d95aa53f",
+  "timestamp": "2026-09-27T19:25:31.322901+00:00",
+  "pipeline_version": "0.1.0",
+  "git_commit": "2610a533d84e72a3760a7dbd49c3683c73d22a70",
+  "kind": "baseline_forecast",
+  "inputs": {
+    "history_rows": 3912548,
+    "holdout_rows": 94871,
+    "series": 5380
+  },
+  "outputs": {
+    "baseline_results": "experiments\\baseline_results.json"
+  },
+  "validation": {
+    "overall": "PASS",
+    "note": "models evaluated on identical temporal split"
+  }
+}

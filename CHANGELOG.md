@@ -1,6 +1,30 @@
 # Changelog
 
-## 2026-09-27
+## 2026-09-28
+
+### Checkpoint 05 — Baseline forecasting + evaluation harness
+- Added `metrics.py` (WMAPE incl. competition-weighted variant, MAE, RMSE),
+  `baselines.py` (seasonal naive lag-7, moving average 28d) and
+  `evaluate.py` (temporal-split runner).
+- Split: final 28 days of history (2024-05-06 → 2024-06-02), matching the
+  competition horizon; models see only pre-horizon data.
+- **Results (experiments/baseline_results.json):**
+  seasonal_naive_7 — WMAPE 33.74%, weighted WMAPE 47.34%, MAE 39.49, RMSE 124.43;
+  moving_average_28 — WMAPE 31.64%, weighted WMAPE 41.30%, MAE 37.03, RMSE 118.26.
+  Moving average currently beats seasonal naive; preserved as the bar for
+  LightGBM.
+- Documented fallbacks, all quantified in results: series regularized to a
+  gapless daily grid (warehouse date gaps); cold-start series (<7d history,
+  6 series/76 rows) use their own available-days mean; zero-history series
+  (10 in seasonal naive; 1,613 series without recent rows for the 28d window,
+  mostly discontinued) use the global history mean. Hard gate: evaluation
+  refuses to run if any holdout row lacks a prediction.
+- 12 new tests (metrics edge cases, baseline behavior, gap/cold-start
+  regressions). 32/32 pass.
+- Added `docs/PROJECT_STORY.md`: layman's narrative of architecture,
+  intention, goals, built vs pending.
+
+### 2026-09-27
 
 ### Checkpoint 04 — SQL analytics layer
 - Added 18 analytics queries (`sql/analytics/`), one business question each,

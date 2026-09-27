@@ -1,0 +1,122 @@
+# DemandOps — The Story So Far
+
+*(A plain-language tour of this project: why it exists, how it fits together,
+what is already built, and what is still on the road ahead. Last updated:
+Checkpoint 05, 2026-09-28. This file is refreshed as milestones land.)*
+
+---
+
+## 1. The story: a grocery chain that hates empty shelves
+
+Imagine you run Rohlik — a quick-grocery delivery company in Central Europe.
+Customers order groceries in an app, and within a few hours a courier drops
+them at the door. You have warehouses in Prague (three of them), Brno,
+Budapest, Frankfurt, and Munich.
+
+Every day you face three embarrassingly simple-sounding questions:
+
+1. **How much of each product will people order tomorrow?** (forecasting)
+2. **Which products are about to run out on the shelf?** (stockout risk)
+3. **What should we actually *do* about it — and by when?** (recommendations)
+
+Answering these well is the difference between happy customers and "sorry,
+we're out of bananas." This project, **DemandOps**, is a working miniature of
+the data platform a company would build to answer them — built with real data
+from a real Kaggle competition run by Rohlik itself: about **4 million rows**
+of daily sales across **5,390 products × warehouses** over almost four years
+(Aug 2020 → Jun 2024).
+
+It is deliberately built like production software, not like a throwaway
+Kaggle notebook: every step is validated, logged, tested, and checkpointed in
+git, so any claim this project makes can be traced to evidence in the repo.
+
+---
+
+## 2. The intended architecture: an assembly line
+
+Think of the system as an assembly line where each station does one job and
+hands its output — never garbage — to the next:
+
+```
+ real data (CSV)          →  [1] VALIDATION GATE  →  [2] PostgreSQL  →
+ [3] SQL analytics        →  [4] FORECASTING      →  [5] STOCKOUT RISK →
+ [6] RECOMMENDATIONS      →  [7] API              →  [8] DASHBOARD  →
+ [9] WHAT-IF SIMULATOR
+```
+
+- **[1] The validation gate.** Before anything touches the data, the data has
+  to prove it's trustworthy: right columns, right types, no duplicated
+  records, no impossible numbers (negative sales?), no mystery gaps in the
+  calendar. Problems are *reported loudly and quantified*, never quietly
+  swept under the rug. A written report + run manifest is produced every run.
+- **[2] PostgreSQL.** The vetted data lands in a real database with proper
+  keys and relationships — the single source of truth everything else reads.
+- **[3] SQL analytics.** A folder of plain SQL questions ("which warehouse
+  sells the most?", "do promotions really help?") that business people could
+  audit line by line.
+- **[4] Forecasting.** Statistical + machine-learning models that predict
+  daily demand per product per warehouse. Rule #1: simple baselines first,
+  and any fancy model must *beat* them on a fair, time-ordered test — no
+  peeking into the future.
+- **[5] Stockout risk.** Combines forecasts with shelf-availability signals
+  to flag "this will run out" situations.
+- **[6] Recommendations.** Turns risk into plain instructions ("replenish
+  ~N units of product X") with the assumptions printed on the label.
+- **[7] API / [8] Dashboard.** The served-up answers: endpoints and screens
+  so a human can actually use the machine's thinking.
+- **[9] What-if simulator.** A playground: "what if we discount 20% next
+  week?" — without ever rewriting history.
+
+**The expected goal:** a portfolio-grade system where every number on the
+dashboard can survive the question *"how do you know?"* — because the
+validation reports, experiment logs, and honest comparisons are all in the
+repository.
+
+---
+
+## 3. What is already built ✅
+
+| Milestone | What it means in plain words |
+|---|---|
+| **Project skeleton** | Clean folder layout, safety rules (AGENTS.md), git-ignored secrets, one documented checkpoint per milestone. |
+| **Real data acquired** | The actual Rohlik dataset downloaded and left untouched (read-only raw zone). 4.0M sales rows, 7 warehouses, ~4 years. |
+| **Validation gate** | Every table is checked on every run. First run's findings are quantified in `docs/DATASET.md`: 52 rows with missing sales, 61 missing calendar days, 32 rows with corrupt discount values, 42 catalog-only products. Nothing was silently deleted. |
+| **Database loaded** | All tables copied into PostgreSQL with row counts verified against the source files; keys and indexes in place. |
+| **18 SQL analyses** | Real business questions already answered: Friday/Saturday demand peaks (~+22% vs Monday), promotions lift sales ~36%, ~8–9 units per order, which SKUs are most erratic, where stockout exposure concentrates, an estimated "lost sales" upper bound per warehouse. |
+| **Baseline forecasts** | The two honest yardsticks are now measured on a strictly time-ordered test (train on the past, score on the final 28 days): "repeat last week's pattern" scores WMAPE 33.7%, "predict the recent 28-day average" scores 31.6%. The moving average currently leads — and any fancier model (see below) must beat *these numbers* on the identical test or the result gets published anyway. |
+| **Testing** | 32 automated tests passing — including nasty-input tests proving the validator *fails loudly* on bad data, and forecasting tests covering gap-filled histories, cold-start products, and metric edge cases. |
+
+## 5. What is being worked on now 🔨
+
+- **LightGBM forecasting (Checkpoint 06):** the machine-learning model with
+  lag/rolling/calendar/promotion features, trained GPU-accelerated (RTX 4050)
+  and evaluated on the *exact same* temporal split as the baselines above.
+  If it fails to beat 31.6% WMAPE, that finding is recorded, not buried.
+
+## 6. What is deliberately still ahead ⏳
+
+- **LightGBM forecasting (GPU-accelerated)** — the machine-learning model
+  with lag/rolling/calendar/promo features; it must *beat or honestly lose
+  to* the baselines, and either result gets published.
+- **Stockout risk engine** — availability-aware risk scoring (the data has
+  an *observed* availability signal, but no inventory-unit counts; that
+  limitation is documented, never papered over).
+- **Recommendation engine** — deterministic replenishment suggestions with
+  printed assumptions.
+- **What-if simulator** — promotion/holiday/demand scenarios on top of
+  forecasts, never touching history.
+- **FastAPI service** — `/health`, `/forecast`, `/risk`, `/recommendations`,
+  `/simulation` endpoints serving pre-computed results (no training inside
+  request handlers).
+- **Streamlit dashboard** — executive overview → trends → forecast quality →
+  risk → recommendations → what-if → data-quality status.
+- **Final validation report** — one document with every experiment, metric,
+  and known limitation, reproducible from the repo.
+
+## 7. The operating principles, in one breath
+
+Raw data is sacred and read-only; bad data fails loudly with evidence; simple
+baselines are the judges of fancy models; time never be shuffled in
+forecasting; every run leaves a manifest; secrets stay local; the laptop
+stays cool (heavy training goes to the GPU, sequential not parallel); and no
+claim is made louder than the evidence in this repository.

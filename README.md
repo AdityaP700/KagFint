@@ -5,10 +5,12 @@ portfolio project covering data validation, SQL analytics, time-series
 forecasting, stockout risk, recommendations, a what-if simulator, an API, and
 a dashboard.
 
-**Status: Checkpoint 04 — SQL analytics layer complete.** All tables are
-loaded in the `rohlik` schema with row counts verified against the raw CSVs,
-and 18 business-question queries run against them (`docs/SQL_CATALOG.md`,
-outputs in `data/processed/analytics/`).
+**Status: Checkpoint 05 — baselines measured.** Data loaded in the `rohlik`
+schema (row counts verified), 18 business-question queries running against it
+(`docs/SQL_CATALOG.md`), and baseline forecasts evaluated on a strict temporal
+split: moving_average_28 WMAPE 31.6% vs seasonal_naive_7 33.7%
+(`experiments/baseline_results.json`). For a plain-language tour of the
+project, read `docs/PROJECT_STORY.md`.
 
 ## Current state
 
