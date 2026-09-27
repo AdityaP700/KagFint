@@ -2,6 +2,19 @@
 
 ## 2026-09-27
 
+### Checkpoint 03 — PostgreSQL schema + loading
+- Applied `sql/ddl/001_schema.sql`: dedicated `rohlik` schema, tables
+  (`warehouses`, `inventory`, `calendar`, `sales_train`, `sales_test`,
+  `test_weights`) with PKs, FKs to `warehouses`, and date/warehouse indexes.
+- Created database `kagfint` (PostgreSQL 18, local port 5433).
+- Loaded all tables via psycopg3 COPY — row counts verified against CSVs
+  (sales_train 4,007,419) plus an in-DB referential check (0 orphan sales rows).
+  Loads are idempotent (skip if counts match; `--force` truncates+reloads).
+- Added `src/demandops/db.py` (credentials only from `.env`; never logged),
+  4 DB integration tests (skip cleanly when no DB configured). 20/20 tests pass.
+- Sanity aggregates confirm sane data (e.g. Prague_1 largest, Frankfurt_1
+  shortest history).
+
 ### Checkpoint 02 — Dataset acquired; ingestion + validation layer
 - Downloaded Rohlik Sales Forecasting v2 (47.3 MB zip + 299 MB extracted) to
   `data/raw/` (kept immutable, zip retained for provenance).

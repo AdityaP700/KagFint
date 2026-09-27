@@ -1,0 +1,22 @@
+{
+  "run_id": "cff57e2e-a878-4cc3-80ec-753fbc2b7323",
+  "timestamp": "2026-09-27T18:27:36.790884+00:00",
+  "pipeline_version": "0.1.0",
+  "git_commit": "f7a710dc247448086bda15abc77df7805b55e12d",
+  "kind": "db_load",
+  "inputs": {
+    "inventory": 5432,
+    "calendar": 23016,
+    "sales_test": 47021,
+    "test_weights": 5390,
+    "sales_train": 4007419
+  },
+  "outputs": {
+    "database": "kagfint",
+    "schema": "rohlik"
+  },
+  "validation": {
+    "overall": "PASS",
+    "note": "row counts verified against CSVs"
+  }
+}
