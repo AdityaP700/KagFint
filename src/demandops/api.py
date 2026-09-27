@@ -20,10 +20,13 @@ import json
 
 import pandas as pd
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
 from demandops import config
 from demandops.simulator import apply_scenario
+
+DASHBOARD_PATH = config.PROCESSED_DATA_DIR / "dashboard" / "index.html"
 
 ARTIFACTS = {
     "forecasts": config.PROCESSED_DATA_DIR / "forecasts" / "gbm_holdout_predictions.csv",
@@ -84,6 +87,15 @@ def health() -> dict:
         "status": "ok",
         "artifacts": {name: state.get(name) is not None for name in ARTIFACTS},
     }
+
+
+@app.get("/dashboard", response_class=HTMLResponse, include_in_schema=False)
+def dashboard() -> HTMLResponse:
+    """Static decision dashboard generated from the frozen artifacts."""
+    if not DASHBOARD_PATH.exists():
+        raise HTTPException(status_code=503,
+                            detail="Run `python -m demandops.dashboard` first.")
+    return HTMLResponse(DASHBOARD_PATH.read_text(encoding="utf-8"))
 
 
 @app.get("/forecast/summary")

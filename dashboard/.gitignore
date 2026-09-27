@@ -4,3 +4,4 @@ build/
 .env
 .npm-cache/
 template/
+sources/**/connection.options.yaml

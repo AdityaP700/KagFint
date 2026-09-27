@@ -5,11 +5,14 @@ portfolio project covering data validation, SQL analytics, time-series
 forecasting, stockout risk, recommendations, a what-if simulator, an API, and
 a dashboard.
 
-**Status: Checkpoint 09 — what-if simulator.** Forecasting (XGBoost CUDA,
-WMAPE 25.2% vs 31.6% baseline), labeled-assumption risk engine (1,051 HIGH),
-versioned recommendations, and scenario analysis with strict
-BASELINE/SIMULATED separation (identity scenario reproduces the risk table
-exactly at runtime). Evidence: `experiments/`, `data/processed/`.
+**Status: Checkpoint 11 — presentation layer.** Full pipeline operational:
+validated data → PostgreSQL → SQL analytics → GPU forecasting (XGBoost,
+WMAPE 25.2% vs 31.6% baseline) → labeled risk engine → versioned
+recommendations → what-if simulator → **presentation**: `rich` terminal
+report (`python -m demandops.report`), static decision dashboard
+(`python -m demandops.dashboard`, also at API `/dashboard`), and FastAPI
+Swagger at `/docs`. Evidence.dev BI path scaffolded in `dashboard/` (status
+in `dashboard/README.md`). Evidence: `experiments/`, `data/processed/`.
 Plain-language tour: `docs/PROJECT_STORY.md`.
 
 ## Current state

@@ -2,6 +2,41 @@
 
 ## 2026-09-28
 
+### Checkpoint 11 — Presentation layer: terminal report + decision dashboard
+- Architecture decision recorded: layered presentation instead of a
+  hand-rolled Streamlit app — `rich` terminal report for pipeline health,
+  static HTML decision dashboard for stakeholders, FastAPI Swagger (/docs) as
+  the interactive artifact, and an Evidence.dev (markdown+SQL) project as the
+  future BI path. Rationale: matches the transformation/BI split real data
+  teams use; avoids fragile hosting.
+- Added `report.py`: terminal report ("run manifest made visible") —
+  validation-gate summary with quantified WARN evidence, forecast-quality
+  table vs baselines, risk tiers + top HIGH-risk series, recommendation
+  action counts. Run: `python -m demandops.report`.
+- Added `dashboard.py`: self-contained static HTML decision dashboard
+  (pure-CSS charts, zero external assets, offline-safe) generated from frozen
+  artifacts; served by the API at `/dashboard`.
+- Added `bi_load.py`: loads frozen artifacts into a curated `bi` Postgres
+  schema (`bi.risk_scores`, `bi.recommendations`, `bi.simulation`) — the BI
+  layer reads the curated schema, not raw CSVs.
+- Evidence.dev scaffold in `dashboard/`: source connects and evaluates
+  against local Postgres; static build currently blocked in SvelteKit
+  prerender (v40-era npm stack). Status, root-causes fixed so far, and resume
+  instructions documented in `dashboard/README.md`. Committed as future work.
+- 2 dashboard tests (decision content present; self-contained, no external
+  assets). 104/104 tests pass.
+
+### Checkpoint 10 — FastAPI service
+- Added `api.py`: serves frozen artifacts — `/health`, `/forecast/summary`,
+  `/forecast/series/{id}`, `/risk` (+`/summary`), `/recommendations`,
+  `/simulation` (cheap scenario arithmetic, no training in request paths),
+  `/dashboard`. OpenAPI/Swagger auto-exposed at `/docs`.
+- Error contract: 404 unknown series, 422 malformed/invalid params
+  (tier/action Literals, limit bounds, scenario ranges), 503 missing
+  artifacts. NaN-safe JSON serialization.
+- 15 API tests per the validation protocol. (With feature/risk suites:
+  102/102 at commit time.)
+
 ### Checkpoint 09 — What-if simulator
 - Added `simulator.py`: scenario analysis over the frozen risk table with
   strict BASELINE/SIMULATED separation — baseline columns copied and verified

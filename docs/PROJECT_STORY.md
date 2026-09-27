@@ -2,7 +2,7 @@
 
 *(A plain-language tour of this project: why it exists, how it fits together,
 what is already built, and what is still on the road ahead. Last updated:
-Checkpoint 09, 2026-09-28. This file is refreshed as milestones land.)*
+Checkpoint 11, 2026-09-28. This file is refreshed as milestones land.)*
 
 ---
 
@@ -94,21 +94,21 @@ repository.
 | **What-if simulator** | A scenario playground over the frozen forecasts: "what if demand surges 20% for the holidays and we also fix a tenth of the availability shortfall?" On real data that combination cuts projected unmet demand nearly in half (646k → 325k units) — fixing availability dominates even during a surge. Guarantees: the baseline columns are copied and verified untouched, history is never modified, and the do-nothing scenario must reproduce the risk engine's numbers exactly or the run aborts. The promotion lever reuses the project's own measured ~36% uplift, honestly labeled an ASSUMED elasticity, not a causal promise. |
 | **Testing** | 87 automated tests passing — validator fails-loudly tests, the leakage-spike test, forecasting gap/cold-start regressions, risk-engine boundary cases, the 30-test recommendation battery, and 13 simulator tests covering lever math, separation guarantees, and refusal of invalid scenarios. |
 
+| **Presentation layer** | Three layered views, no Streamlit in sight (a deliberate architecture decision): a **terminal report** (`python -m demandops.report`) that makes the run manifest visible — validation gate, forecast metrics, risk tiers — because that's how engineers actually monitor a pipeline; a **static decision dashboard** (self-contained HTML, works offline, also served at the API's `/dashboard`) for the non-technical stakeholder: KPIs, forecast quality vs baselines, risk tiers, top products at risk, recommended actions; and **auto-generated Swagger docs** at `/docs` where anyone can query the live API. A real BI tool (Evidence.dev, markdown+SQL over the curated `bi` Postgres schema) is scaffolded as the future path — its build blocker is documented honestly in `dashboard/README.md`. |
+| **Testing** | 104 automated tests passing — validator fails-loudly tests, the leakage-spike test, forecasting gap/cold-start regressions, risk-engine boundary cases, the 30-test recommendation battery, simulator separation guarantees, API error-contract tests, and dashboard self-containment checks. |
+
 ## 5. What is being worked on now 🔨
 
-- **FastAPI service (Checkpoint 10):** serving the frozen artifacts
-  (`/health`, `/forecast`, `/risk`, `/recommendations`, `/simulation`) —
-  request handlers never train models.
+- **Final validation report (Checkpoint 12):** one document with every
+  experiment, metric, known limitation, and reproducibility instructions.
 
 ## 6. What is deliberately still ahead ⏳
 
-- **FastAPI service** — `/health`, `/forecast`, `/risk`, `/recommendations`,
-  `/simulation` endpoints serving pre-computed results (no training inside
-  request handlers).
-- **Streamlit dashboard** — executive overview → trends → forecast quality →
-  risk → recommendations → what-if → data-quality status.
 - **Final validation report** — one document with every experiment, metric,
   and known limitation, reproducible from the repo.
+- **Evidence.dev BI build** — the markdown+SQL dashboard is scaffolded and
+  connected; only the SvelteKit prerender step remains (see
+  `dashboard/README.md`).
 
 ## 7. The operating principles, in one breath
 
