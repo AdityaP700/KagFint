@@ -1,0 +1,6 @@
+# Installed as needed, per milestone. Keep lean.
+pandas>=2.2
+numpy>=1.26
+python-dotenv>=1.0
+sqlalchemy>=2.0
+pytest>=8.0

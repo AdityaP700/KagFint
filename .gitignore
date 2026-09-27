@@ -1,0 +1,34 @@
+# Environment / secrets
+.env
+.venv/
+venv/
+
+# Python artifacts
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Local data (raw is immutable and must never be committed)
+data/raw/
+data/interim/
+data/processed/
+data/external/
+
+# Large generated artifacts
+models/
+artifacts/
+logs/
+*.log
+
+# Databases
+*.db
+*.sqlite
+*.dump
