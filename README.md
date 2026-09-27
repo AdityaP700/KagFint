@@ -241,13 +241,26 @@ Repo layout:
 - The [Evidence.dev](https://docs.evidence.dev/) BI layer, already scaffolded
   in `dashboard/`, once its SvelteKit build quirk is resolved.
 
-## Docs map
+## Docs map and contributing
 
 [`docs/PROJECT_STORY.md`](docs/PROJECT_STORY.md) (the plain-language tour) ·
 [`docs/DATASET.md`](docs/DATASET.md) (data profile and anomalies) ·
 [`docs/SQL_CATALOG.md`](docs/SQL_CATALOG.md) (every query and why) ·
+[`docs/VALIDATION_REPORT.md`](docs/VALIDATION_REPORT.md) (the full experiment
+log: checks, splits, metrics, per-warehouse results, limitations,
+reproducibility) ·
+[`docs/INTERVIEW/QUESTIONS.md`](docs/INTERVIEW/QUESTIONS.md) (senior-level
+cross-questions with candid answers) ·
+[`docs/INTERVIEW/FAILURES.md`](docs/INTERVIEW/FAILURES.md) (nine failures,
+root causes, fixes, lessons) ·
+[`docs/INTERVIEW/PIPELINE_WALKTHROUGH.md`](docs/INTERVIEW/PIPELINE_WALKTHROUGH.md)
+(every stage: command, code, tests, failure modes) ·
 [`AGENTS.md`](AGENTS.md) (operating rules) ·
 [`CHANGELOG.md`](CHANGELOG.md) (checkpoint history).
+
+**Contributing:** see [CONTRIBUTING.md](CONTRIBUTING.md). Help is explicitly
+wanted on the Evidence.dev build, cold-start forecasting, and rolling-origin
+backtests. Licensed under the [MIT License](LICENSE).
 
 *Credits: the Rohlik Group published the competition dataset; Kaggle's
 community notebooks clarified the availability-column semantics; the Blinkit

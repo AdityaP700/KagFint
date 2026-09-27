@@ -2,6 +2,23 @@
 
 ## 2026-09-28
 
+### Checkpoint 12 — Final validation report + curated docs + collaboration setup
+- Added `docs/VALIDATION_REPORT.md` (Checkpoint 12 deliverable): dataset
+  profile, validation-check outcomes, split definition, all model metrics
+  incl. per-warehouse breakdown (best Prague_1 23.0%, worst Frankfurt_1
+  31.7%), risk/recommendation results, limitations, reproducibility steps.
+- Added `docs/INTERVIEW/`: `QUESTIONS.md` (senior Applied-AI cross-question
+  bank with evidence-backed answers), `FAILURES.md` (nine real failures with
+  root causes, fixes, lessons), `PIPELINE_WALKTHROUGH.md` (every stage:
+  command, code, tests, failure modes).
+- Added `CONTRIBUTING.md` (collaboration request, ground rules) and the MIT
+  `LICENSE`.
+- Repo curation: `.zcodeignore` untracked (local tooling), `customization/`
+  ignored.
+- Deployment: GitHub push (purged history), Render blueprint, GitHub Pages
+  workflow, Neon curated `bi` schema loaded and verified; bi_load switched to
+  batched pipeline inserts for WAN performance.
+
 ### Checkpoint 11 — Presentation layer: terminal report + decision dashboard
 - Architecture decision recorded: layered presentation instead of a
   hand-rolled Streamlit app — `rich` terminal report for pipeline health,

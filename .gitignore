@@ -36,3 +36,7 @@ logs/
 # Evidence build dirs
 .svelte-kit/
 .npm-cache/
+
+# local tooling
+.zcodeignore
+customization/
