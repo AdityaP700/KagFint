@@ -2,6 +2,28 @@
 
 ## 2026-09-28
 
+### Checkpoint 07 — Stockout risk engine
+- Added `risk.py`: deterministic availability-aware risk scoring over the
+  forecast horizon. Every field is labeled OBSERVED (recent availability),
+  DERIVED (forecast units; unmet units), or ASSUMED (future availability =
+  recent availability; tier thresholds) — per the validation protocol's
+  OBSERVED/DERIVED/ASSUMED separation.
+- Data limitation respected: no inventory units or lead times exist in the
+  dataset, so this is availability-aware demand risk, not unit-coverage
+  stockout prediction (documented in docs/DATASET.md).
+- Series with no availability history (data gaps) are flagged and assumed
+  fully available rather than inventing scarcity.
+- Tiers on real data (3,739 forecast series): HIGH 1,051 / MEDIUM 729 /
+  LOW 1,959. Top HIGH-risk: Berry_1 across Prague/Brno warehouses
+  (~50–64% recent availability, ~5–9k estimated unmet units each).
+  Outputs: `data/processed/risk/risk_scores.csv`,
+  `experiments/risk_summary.json` + run manifest.
+- GBM predictions now persisted (`data/processed/forecasts/`) with a fixed
+  seed (re-run reproduces WMAPE 25.18%); downstream layers consume files,
+  never retrain.
+- 7 risk tests (tier boundaries, zero demand/availability, data gaps,
+  determinism). 44/44 pass.
+
 ### Checkpoint 06 — Gradient-boosted forecasting on GPU
 - Model choice justified and recorded: LightGBM 4.7.0 Windows wheel has no GPU
   support (verified empirically); XGBoost 3.2.0 wheel includes CUDA and runs on

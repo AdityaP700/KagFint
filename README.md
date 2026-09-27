@@ -5,14 +5,14 @@ portfolio project covering data validation, SQL analytics, time-series
 forecasting, stockout risk, recommendations, a what-if simulator, an API, and
 a dashboard.
 
-**Status: Checkpoint 06 — GBM forecasting beats baselines.** Data loaded in
-the `rohlik` schema (row counts verified), 18 business-question queries
-(`docs/SQL_CATALOG.md`), baselines measured on a strict temporal split
-(moving_average_28 WMAPE 31.6%, seasonal_naive_7 33.7%), and an
-XGBoost (CUDA) model with leak-safe features reaching **WMAPE 25.2%**
-(weighted 31.8%) — a ~20% relative improvement over the best baseline.
-Full evidence: `experiments/baseline_results.json`, `experiments/gbm_results.json`.
-Plain-language tour: `docs/PROJECT_STORY.md`.
+**Status: Checkpoint 07 — stockout risk engine.** Data loaded in the
+`rohlik` schema, 18 SQL analyses, temporal-split evaluation with baselines
+(moving_average_28 WMAPE 31.6%) and XGBoost (CUDA) forecasting reaching
+**WMAPE 25.2%**. The risk engine scores each series' horizon demand against
+its observed availability (all fields labeled OBSERVED/DERIVED/ASSUMED):
+HIGH 1,051 / MEDIUM 729 / LOW 1,959 series. Evidence:
+`experiments/`, `data/processed/risk/`. Plain-language tour:
+`docs/PROJECT_STORY.md`.
 
 ## Current state
 

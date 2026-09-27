@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-27T19:47:42.675101+00:00",
+  "generated_at": "2026-09-27T20:18:35.184536+00:00",
   "model": "xgboost_hist_cuda",
   "xgboost_version": "3.2.0",
   "params": {
-    "n_estimators": "740",
+    "n_estimators": "928",
     "learning_rate": "0.03",
     "max_depth": "8",
     "min_child_weight": "10",
@@ -13,9 +13,10 @@
     "tree_method": "hist",
     "device": "cuda",
     "eval_metric": "mae",
-    "n_jobs": "8"
+    "n_jobs": "8",
+    "random_state": "42"
   },
-  "best_rounds_from_inner_validation": 740,
+  "best_rounds_from_inner_validation": 928,
   "train_rows": 3912496,
   "feature_count": 25,
   "leakage_policy": {
@@ -26,53 +27,53 @@
   },
   "results": {
     "overall": {
-      "wmape": 0.2521339333941992,
-      "wmape_weighted": 0.3177951248200984,
-      "mae": 29.50792268941091,
-      "rmse": 95.73441570893638,
+      "wmape": 0.25177451244963217,
+      "wmape_weighted": 0.31738042671994465,
+      "mae": 29.465858674851404,
+      "rmse": 95.65189764951026,
       "n_rows": 94871
     },
     "per_warehouse": {
       "Brno_1": {
-        "wmape": 0.24213499259068938,
-        "mae": 40.92810446226483,
-        "rmse": 155.03471535679756,
+        "wmape": 0.2423395065425552,
+        "mae": 40.96267347807043,
+        "rmse": 155.44917015199906,
         "n_rows": 14620
       },
       "Budapest_1": {
-        "wmape": 0.2765942348568164,
-        "mae": 29.669607763072204,
-        "rmse": 68.48433088523905,
+        "wmape": 0.2783792229016739,
+        "mae": 29.86107919840458,
+        "rmse": 69.53601680707811,
         "n_rows": 13374
       },
       "Frankfurt_1": {
-        "wmape": 0.3177932535372228,
-        "mae": 16.467200016770498,
-        "rmse": 32.60477828837138,
+        "wmape": 0.3174149415824319,
+        "mae": 16.447596898834743,
+        "rmse": 32.327957924142204,
         "n_rows": 6353
       },
       "Munich_1": {
-        "wmape": 0.3142737996374813,
-        "mae": 41.35790318478884,
-        "rmse": 92.76801910722747,
+        "wmape": 0.31589768161923704,
+        "mae": 41.5716033209836,
+        "rmse": 93.75335184778459,
         "n_rows": 7767
       },
       "Prague_1": {
-        "wmape": 0.23055113348900239,
-        "mae": 36.54059398629797,
-        "rmse": 111.03713849801534,
+        "wmape": 0.22979776813146924,
+        "mae": 36.42119133042565,
+        "rmse": 111.13371151270877,
         "n_rows": 17709
       },
       "Prague_2": {
-        "wmape": 0.2449494178573234,
-        "mae": 22.364553112771176,
-        "rmse": 75.94340456379655,
+        "wmape": 0.2423702646728225,
+        "mae": 22.129069359083132,
+        "rmse": 73.76108745659339,
         "n_rows": 17366
       },
       "Prague_3": {
-        "wmape": 0.23593817865422498,
-        "mae": 19.395585793627966,
-        "rmse": 59.82328330931425,
+        "wmape": 0.23429522348979942,
+        "mae": 19.260524660120613,
+        "rmse": 59.18621193806873,
         "n_rows": 17682
       }
     }
@@ -80,53 +81,53 @@
   "top_features": [
     {
       "feature": "rmean_28_lag28",
-      "importance": 0.3277803063392639
+      "importance": 0.3739786148071289
     },
     {
       "feature": "warehouse_Brno_1",
-      "importance": 0.15649595856666565
+      "importance": 0.1501365453004837
     },
     {
       "feature": "rmean_7_lag28",
-      "importance": 0.12915195524692535
-    },
-    {
-      "feature": "warehouse_Prague_3",
-      "importance": 0.06673603504896164
+      "importance": 0.078544981777668
     },
     {
       "feature": "warehouse_Prague_1",
-      "importance": 0.06414329260587692
+      "importance": 0.07785253971815109
     },
     {
-      "feature": "sell_price_main",
-      "importance": 0.05207817628979683
+      "feature": "warehouse_Prague_3",
+      "importance": 0.061874546110630035
     },
     {
       "feature": "warehouse_Prague_2",
-      "importance": 0.051481470465660095
+      "importance": 0.05785641819238663
     },
     {
-      "feature": "l1_category_name_en_Bakery",
-      "importance": 0.03319805860519409
-    },
-    {
-      "feature": "lag_35",
-      "importance": 0.026581518352031708
+      "feature": "sell_price_main",
+      "importance": 0.054238539189100266
     },
     {
       "feature": "lag_28",
-      "importance": 0.014813992194831371
+      "importance": 0.033712174743413925
+    },
+    {
+      "feature": "l1_category_name_en_Bakery",
+      "importance": 0.02672114409506321
+    },
+    {
+      "feature": "discount_total",
+      "importance": 0.012947022914886475
     }
   ],
   "baseline_comparison": {
     "seasonal_naive_7": {
       "wmape": 0.3374207726779158,
-      "gbm_delta_wmape": -0.0853
+      "gbm_delta_wmape": -0.0856
     },
     "moving_average_28": {
       "wmape": 0.31636497927248836,
-      "gbm_delta_wmape": -0.0642
+      "gbm_delta_wmape": -0.0646
     }
   }
 }

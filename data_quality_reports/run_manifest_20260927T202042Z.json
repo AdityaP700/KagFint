@@ -1,0 +1,19 @@
+{
+  "run_id": "a6d009f2-685c-4dd6-b7ea-de14caf53458",
+  "timestamp": "2026-09-27T20:20:42.972814+00:00",
+  "pipeline_version": "0.1.0",
+  "git_commit": "4745727c41000bc0caccb488b86be8c073ddc0a6",
+  "kind": "stockout_risk",
+  "inputs": {
+    "forecast_rows": 94871,
+    "series_with_availability": 3777
+  },
+  "outputs": {
+    "risk_scores": "data\\processed\\risk\\risk_scores.csv",
+    "risk_summary": "experiments\\risk_summary.json"
+  },
+  "validation": {
+    "overall": "PASS",
+    "note": "deterministic rules; labels recorded"
+  }
+}

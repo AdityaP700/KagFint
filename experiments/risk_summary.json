@@ -1,0 +1,102 @@
+{
+  "generated_at": "2026-09-27T20:20:42.950811+00:00",
+  "horizon": {
+    "start": "2024-05-06",
+    "end": "2024-06-02"
+  },
+  "series": 3739,
+  "tier_counts": {
+    "LOW": 1959,
+    "HIGH": 1051,
+    "MEDIUM": 729
+  },
+  "labels": {
+    "recent_availability": "OBSERVED",
+    "forecast_units": "DERIVED (XGBoost forecasts)",
+    "assumed_future_availability": "ASSUMED (= recent availability)",
+    "estimated_unmet_units": "DERIVED from ASSUMED availability",
+    "tier_thresholds": "ASSUMED business parameters"
+  },
+  "top_high_risk": [
+    {
+      "unique_id": 619,
+      "name": "Berry_1",
+      "warehouse": "Prague_1",
+      "forecast_units": 26199.75501,
+      "recent_availability": 0.6390476190476191,
+      "estimated_unmet_units": 9456.86
+    },
+    {
+      "unique_id": 620,
+      "name": "Berry_1",
+      "warehouse": "Brno_1",
+      "forecast_units": 14279.62545,
+      "recent_availability": 0.5059999999999999,
+      "estimated_unmet_units": 7054.13
+    },
+    {
+      "unique_id": 617,
+      "name": "Berry_1",
+      "warehouse": "Prague_2",
+      "forecast_units": 12883.76198,
+      "recent_availability": 0.46388888888888885,
+      "estimated_unmet_units": 6907.13
+    },
+    {
+      "unique_id": 3097,
+      "name": "Watermelon_17",
+      "warehouse": "Brno_1",
+      "forecast_units": 25836.99236,
+      "recent_availability": 0.7814285714285714,
+      "estimated_unmet_units": 5647.23
+    },
+    {
+      "unique_id": 618,
+      "name": "Berry_1",
+      "warehouse": "Prague_3",
+      "forecast_units": 14089.61995,
+      "recent_availability": 0.6321052631578947,
+      "estimated_unmet_units": 5183.5
+    },
+    {
+      "unique_id": 567,
+      "name": "Strawberry_7",
+      "warehouse": "Budapest_1",
+      "forecast_units": 10747.48787,
+      "recent_availability": 0.5222222222222223,
+      "estimated_unmet_units": 5134.91
+    },
+    {
+      "unique_id": 4965,
+      "name": "Kohlrabi_10",
+      "warehouse": "Prague_1",
+      "forecast_units": 26713.44292,
+      "recent_availability": 0.8228571428571428,
+      "estimated_unmet_units": 4732.1
+    },
+    {
+      "unique_id": 4967,
+      "name": "Kohlrabi_10",
+      "warehouse": "Brno_1",
+      "forecast_units": 28629.782769999998,
+      "recent_availability": 0.8496153846153847,
+      "estimated_unmet_units": 4305.48
+    },
+    {
+      "unique_id": 369,
+      "name": "Roll_5",
+      "warehouse": "Brno_1",
+      "forecast_units": 21471.01324,
+      "recent_availability": 0.8053571428571428,
+      "estimated_unmet_units": 4179.18
+    },
+    {
+      "unique_id": 2470,
+      "name": "Blueberry_17",
+      "warehouse": "Prague_1",
+      "forecast_units": 22669.79149,
+      "recent_availability": 0.8484000000000002,
+      "estimated_unmet_units": 3436.74
+    }
+  ]
+}

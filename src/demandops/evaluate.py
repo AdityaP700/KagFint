@@ -59,7 +59,9 @@ def load_weights() -> pd.DataFrame:
 
 def evaluate(predictions: pd.DataFrame, holdout: pd.DataFrame,
              weights: pd.DataFrame) -> dict:
-    merged = holdout.merge(predictions, on=["unique_id", "date"], how="left")
+    merged = holdout.merge(
+        predictions[["unique_id", "date", "prediction"]],
+        on=["unique_id", "date"], how="left")
     if merged["prediction"].isna().any():
         raise RuntimeError(
             f"{int(merged['prediction'].isna().sum())} holdout rows lack a "
